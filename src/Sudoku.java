@@ -1,13 +1,12 @@
 import java.io.*;
 
-
 /**
  * @author Engulf丶Missing
  */
+
 public class Sudoku {
     public static final int NUM_9 = 9;
     public static final int NUM_2 = 2;
-    public static final int NUM_3 = 3;
     public static final int NUM_4 = 4;
     public static final int NUM_6 = 6;
     public static final int NUM_8 = 8;
@@ -17,6 +16,7 @@ public class Sudoku {
     public static String outputFilename;
     public static int m;
     public static int n;
+
 
     /**
      *
@@ -45,25 +45,17 @@ public class Sudoku {
 
         for (int k = 1; k <= inNum; k++) {
             maze[i][j] = k;
-            if (len != 3){
                 if (checkNum(maze, i, j, x, y)) {
                     if (!insertNum(maze, i, j, x, y, inNum)) {
                         continue;
                     }
                     return true;
                 }
-            }else{
-                if (cheackNum3(maze, i, j)) {
-                    if (!insertNum(maze, i, j, -1, -1, NUM_9)) {
-                        continue;
-                    }
-                    return true;
-                }
-            }
         }
         maze[i][j] = 0;
         return false;
     }
+
 
     /**
      *
@@ -110,36 +102,12 @@ public class Sudoku {
     }
 
 
-    /**
-     *
-     * @param maze 需要填数的数独数组
-     * @param i 当前位置的行
-     * @param j 当前位置的列
-     * @return 单独对3宫进行检查，行，列，9个格子没1-9重复返回true
-     */
-    static boolean cheackNum3(int[][] maze,int i,int j)
-    {
-        int normal = 3;
-        int num = maze[i][j];
-        for(int ii = 0; ii < normal; ii++)
-        {
-            for(int jj = 0; jj < normal; jj++)
-            {
-                if(ii == i && jj == j){
-                    continue;
-                }else if(num == maze[ii][jj]){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
 
     /**
      *
      * @param maze 要打印输出的数组
      */
+
     static void print(int[][] maze) {
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
@@ -149,6 +117,7 @@ public class Sudoku {
         }
         System.out.println();
     }
+
 
 
     /**
@@ -185,10 +154,7 @@ public class Sudoku {
     }
 
 
-    /**
-     *
-     * @param str 接收命令行传来的命令，并按要求提取信息
-     */
+
     public static void loadArgs(String[] str){
         if(str.length>0&&str!=null){
             for(int i=0;i<str.length;i++){
@@ -237,7 +203,7 @@ public class Sudoku {
 
 
 
-        if((len % NUM_2 != 0) && (len != NUM_9) && (len != NUM_3)) {
+        if((len % NUM_2 != 0) && (len != NUM_9)) {
             insertNum(maze, 0, 0, 0, 0, len);
         }else if(len == NUM_4){
             insertNum(maze, 0, 0, 2, 2, len);
@@ -247,10 +213,8 @@ public class Sudoku {
             insertNum(maze, 0, 0, 2, 4, len);
         }else if(len == NUM_9){
             insertNum(maze, 0, 0, 3, 3, len);
-        }else if(len == NUM_3){
-            insertNum(maze, 0, 0, -1 , -1, NUM_9);
         }else{
-            System.out.println("输入有问题");
+            System.out.println("Your input is Error");
         }
 
 
